@@ -2,12 +2,13 @@ val ktorVersion: String by project
 val kotlinVersion: String by project
 val logbackVersion: String by project
 val koinVersion: String by project
+val kMongoVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.8.10"
     id("io.ktor.plugin") version "2.2.3"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
-    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.2.0"
 }
 
 group = "ipsoft.com"
@@ -24,18 +25,22 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktorVersion")
-    implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-server-core:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
-    implementation("io.ktor:ktor-server-call-logging-jvm:$ktorVersion")
-    implementation("io.ktor:ktor-server-netty-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-call-logging:$ktorVersion")
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
-    implementation("io.ktor:ktor-server-default-headers-jvm:2.2.3")
-    implementation("io.ktor:ktor-server-host-common-jvm:2.2.3")
-    implementation("io.ktor:ktor-server-status-pages-jvm:2.2.3")
-    implementation("io.ktor:ktor-server-auth-jvm:2.2.3")
-    testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-default-headers:2.2.3")
+    implementation("io.ktor:ktor-server-resources:$ktorVersion")
+    implementation("io.ktor:ktor-server-host-common:2.2.3")
+    implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
+    implementation("io.ktor:ktor-server-auth:$ktorVersion")
+    implementation("io.ktor:ktor-server-auth-jwt:$ktorVersion")
+    implementation("io.ktor:ktor-server-cors:$ktorVersion")
+    implementation("commons-codec:commons-codec:1.14")
+    testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
 
     // koin
@@ -47,9 +52,12 @@ dependencies {
     // status pages
     implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
 
-    // Mongo Db
-    implementation("org.mongodb:mongodb-driver-sync:4.4.3")
-
     // Klint
     implementation("com.github.shyiko:klint:0.41.0")
+
+    // Gson
+    implementation("io.ktor:ktor-serialization-gson:$ktorVersion")
+
+    // Kmongo
+    implementation("org.litote.kmongo:kmongo-coroutine:$kMongoVersion")
 }
