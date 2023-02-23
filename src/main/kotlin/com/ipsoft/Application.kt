@@ -1,19 +1,27 @@
 package com.ipsoft
 
-import com.ipsoft.plugins.*
-import io.ktor.server.application.*
-import io.ktor.server.netty.EngineMain.main as KtorMain
+import com.ipsoft.base.configureRoutingAndSerialization
+import com.ipsoft.base.configureSecurity
+import com.ipsoft.base.configureStatusPages
+import com.ipsoft.base.http.configureHTTP
+import com.ipsoft.di.ConfigLocator
+import io.ktor.server.application.Application
 
 fun main(args: Array<String>): Unit =
-    KtorMain(args)
+    io.ktor.server.netty.EngineMain.main(args)
 
-@Suppress("unused") // application.conf references the main function. This annotation prevents the IDE from marking it as unused.
+/**
+ * Please note that you can use any other name instead of *module*.
+ * Also note that you can have more then one modules in your application.
+ * */
+
+private val serviceLocator = ConfigLocator
+
+@SuppressWarnings("unused")
 fun Application.module() {
-    configureKoin()
-    configureAuthentication()
-    configureDefaultHeaders()
-    configureSerialization()
-    configureRouting()
-    configureMonitoring()
+    ConfigLocator.provideJwtConfig()
     configureStatusPages()
+    configureSecurity()
+    configureRoutingAndSerialization()
+    configureHTTP()
 }
