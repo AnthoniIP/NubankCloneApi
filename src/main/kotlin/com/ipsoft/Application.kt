@@ -1,7 +1,7 @@
 package com.ipsoft
 
-import io.ktor.server.application.*
 import com.ipsoft.plugins.*
+import io.ktor.server.application.*
 import io.ktor.server.netty.EngineMain.main as KtorMain
 
 fun main(args: Array<String>): Unit =

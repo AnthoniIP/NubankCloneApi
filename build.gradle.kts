@@ -7,6 +7,7 @@ plugins {
     kotlin("jvm") version "1.8.10"
     id("io.ktor.plugin") version "2.2.3"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 }
 
 group = "ipsoft.com"
@@ -37,16 +38,18 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
 
-    //koin
+    // koin
     implementation("io.insert-koin:koin-ktor:$koinVersion")
     implementation("io.insert-koin:koin-core:$koinVersion")
     // SLF4J Logger
     implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
 
-    //status pages
+    // status pages
     implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
 
-    //Mongo Db
+    // Mongo Db
     implementation("org.mongodb:mongodb-driver-sync:4.4.3")
 
+    // Klint
+    implementation("com.github.shyiko:klint:0.41.0")
 }

@@ -1,0 +1,4 @@
+max-line-length: 120
+no-trailing-whitespace: true
+newline-at-eof: true
+wildcard-style: ignore
