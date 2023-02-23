@@ -33,6 +33,7 @@ dependencies {
     implementation("io.ktor:ktor-server-default-headers-jvm:2.2.3")
     implementation("io.ktor:ktor-server-host-common-jvm:2.2.3")
     implementation("io.ktor:ktor-server-status-pages-jvm:2.2.3")
+    implementation("io.ktor:ktor-server-auth-jvm:2.2.3")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
 
