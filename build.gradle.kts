@@ -46,4 +46,7 @@ dependencies {
     //status pages
     implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
 
+    //Mongo Db
+    implementation("org.mongodb:mongodb-driver-sync:4.4.3")
+
 }
