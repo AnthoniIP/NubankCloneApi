@@ -1,5 +1,8 @@
-package com.ipsoft.models
+package com.ipsoft.models.responses
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class LoginResponse(
     val status: Int,
     val message: String,

@@ -1,32 +1,35 @@
 package com.ipsoft.routes
 
-import com.ipsoft.extensions.encodeToBase64
-import com.ipsoft.models.LoginResponse
+import com.ipsoft.data.repository.LoginRepository
+import com.ipsoft.models.requests.LoginRequest
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.koin.ktor.ext.inject
 
 fun Route.performLogin() {
-    post(LOGIN_ROUTE) {
-        val postParameters = call.receiveParameters()
-        val username = postParameters["username"]
-        val password = postParameters["password"]
+    val repository: LoginRepository by inject()
 
-        if (username != null && password != null) {
-            call.respond(
-                message = LoginResponse(
-                    status = 200,
-                    message = "ok",
-                    id = 1,
-                    userName = username,
-                    authenticationToken = "$username - $password".encodeToBase64(),
-                    currentMoney = 5000.40,
-                )
-            )
-        } else {
-            call.respondText { "You must provide login and password fields to perform login" }
+    post(LOGIN_ROUTE) {
+        try {
+            val postParameters = call.receive<LoginRequest>()
+            val username = postParameters.login
+            val password = postParameters.password
+
+            require(username.isNotBlank() && password.isNotBlank())
+
+            val response = repository.performLogin(username, password)
+
+            call.respond(response)
+        } catch (e: IllegalArgumentException) {
+            call.respondText { "Login and password must be provide to perform login" }
+        } catch (e: ContentTransformationException) {
+            call.respondText { "Login and password must be provide to perform login" }
         }
 
+    }
+    get(LOGIN_ROUTE) {
+        call.respondText { "Only post requests allowed for this route" }
     }
 }
